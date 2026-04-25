@@ -330,6 +330,92 @@
     0%, 100% { transform: rotate(-5deg); }
     50% { transform: rotate(5deg); }
   }
+
+  /* ---- POPUP CAFFÈ ---- */
+  .popup-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+  }
+
+  .popup-overlay.open {
+    display: flex;
+    animation: fadeIn 0.2s ease both;
+  }
+
+  .popup-box {
+    background: #1a1a1a;
+    border: 1px solid rgba(255,214,10,0.25);
+    border-radius: 18px;
+    padding: 1.8rem 1.5rem 1.5rem;
+    max-width: 290px;
+    width: 100%;
+    position: relative;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(255,214,10,0.08), 0 20px 60px rgba(0,0,0,0.6);
+    animation: popIn 0.3s cubic-bezier(0.34,1.56,0.64,1) both;
+  }
+
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.85) translateY(10px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  .popup-close {
+    position: absolute;
+    top: 0.7rem;
+    right: 0.8rem;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .popup-close:hover {
+    background: rgba(255,49,49,0.12);
+    border-color: rgba(255,49,49,0.3);
+    color: var(--red);
+  }
+
+  .popup-emoji {
+    font-size: 2.8rem;
+    display: block;
+    margin-bottom: 0.6rem;
+    animation: wobble 3s ease-in-out infinite;
+  }
+
+  .popup-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.05em;
+    color: var(--yellow);
+    margin-bottom: 0.5rem;
+  }
+
+  .popup-text {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .popup-text strong {
+    color: var(--text);
+  }
 </style>
 </head>
 <body>
@@ -408,7 +494,7 @@
       <span class="caffe-emoji">☕</span>
       <div class="caffe-title">Offrimi un caffè</div>
       <p class="caffe-sub">Seriamente. È l'unica cosa che mi tiene in piedi.<br>Se non puoi non fa niente sarò tuo amico anche senza</p>
-      <a href="#" class="caffe-btn">☕ Offri caffè</a>
+      <a href="#" class="caffe-btn" onclick="document.getElementById('caffePopup').classList.add('open'); return false;">☕ Offri caffè</a>
     </div>
 
     <!-- Contacts -->
@@ -428,5 +514,18 @@
     </div>
 
   </div>
+  <!-- Popup Caffè -->
+  <div class="popup-overlay" id="caffePopup">
+    <div class="popup-box">
+      <button class="popup-close" onclick="document.getElementById('caffePopup').classList.remove('open')">✕</button>
+      <span class="popup-emoji">☕</span>
+      <div class="popup-title">vienimi a cercare</div>
+      <p class="popup-text">
+        <strong>offrilo di persona</strong>
+        <span style="font-size:0.75rem; margin-top:0.4rem; display:block;">lo accetto volentieri, giuro</span>
+      </p>
+    </div>
+  </div>
+
 </body>
 </html>
